@@ -1593,3 +1593,103 @@ Simulation:
 
 Elaborate Design:
 <img width="1919" height="1079" alt="Screenshot 2025-11-19 172642" src="https://github.com/user-attachments/assets/01075744-e9f9-40d1-b29f-fe1e18ad20cf" />
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Counter Design:-
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 19.11.2025 17:30:32
+// Design Name: 
+// Module Name: counter_design
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module counter_design(
+    input clk,
+    input reset,
+    input up_down,            
+    output reg [3:0] count
+    );
+    always @(posedge clk or posedge reset) begin
+    if (reset)
+        count <= 0;
+    else if (up_down)
+        count <= count + 1;
+    else
+        count <= count - 1;
+end
+endmodule
+
+Testbench:
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 19.11.2025 17:32:35
+// Design Name: 
+// Module Name: tb_counter_design
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module tb_counter_design(
+
+    );
+    reg clk, reset;
+wire [3:0] count;
+
+
+up_counter_design uut (clk, reset, count);
+
+always #5 clk = ~clk; 
+
+initial begin
+    clk = 0;
+    reset = 1;
+    #15 reset = 0;
+
+    #200 $finish;
+end
+
+initial begin
+    $monitor("Time=%0t | Count=%b", $time, count);
+end
+endmodule
+
+Elaborate Design:
+<img width="1919" height="1079" alt="Screenshot 2025-11-19 173645" src="https://github.com/user-attachments/assets/c25ad714-7d52-4eef-b639-2a946b2670ce" />
+
+Simulation:
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
