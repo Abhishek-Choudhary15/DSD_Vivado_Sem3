@@ -1203,6 +1203,196 @@ Elaborate Design:
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+D_flip_flop:-
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 19.11.2025 09:33:03
+// Design Name: 
+// Module Name: d_flip_flop
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module d_flip_flop(
+    input d,clk,
+    output q,q_bar
+    );
+    wire d_g, d_bar_g;
+    
+    assign #1 d_g = (~(d&(clk)));
+    assign #1 d_bar_g = (~((~d)&(clk)));
+    assign #1 q = (~((d_g)&(q_bar)));
+    assign #1 q_bar = (~((d_bar_g)&q));
+
+endmodule
+
+Testbench:
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 19.11.2025 09:38:23
+// Design Name: 
+// Module Name: tb_d_flip_flop
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module tb_d_flip_flop(
+
+    );
+      reg d, clk;
+    wire dg, d_bar_g, q, q_bar;
+    
+    d_flip_flop uut(d, clk, q, q_bar);
+    
+    initial
+    begin
+    clk=0;
+    forever
+    #5 clk =~clk;
+    end
+    
+    initial
+    begin
+        d=0;
+    #10 d=1;
+    #10
+    $finish;
+   end
+   
+endmodule
+
+Simulation:
+<img width="1919" height="1079" alt="Screenshot 2025-11-19 094728" src="https://github.com/user-attachments/assets/18e0a49e-a884-4664-89a5-cbd94de9f2d4" />
+
+
+
+Elaborate Design:
+<img width="1919" height="1079" alt="Screenshot 2025-11-19 094829" src="https://github.com/user-attachments/assets/f8c02f05-f4fc-4e09-9cd6-802af2d8696b" />
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+JK Flip Flop:-
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 19.11.2025 09:42:50
+// Design Name: 
+// Module Name: jk_flip_flop
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module jk_flip_flop(
+    input j, k, clk,
+    output q, q_bar
+    );
+    wire j_g, k_g;
+    
+    assign #1 j_g=(~(j&(clk)));
+    assign #1 k_g=(~(k&(clk)));
+    assign #1 q =(~((j_g)&(q_bar)));
+    assign #1 q_bar=(~((k_g)&q));
+
+Endmodule
+
+
+Testbench:
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 19.11.2025 09:44:03
+// Design Name: 
+// Module Name: tb_jk_flip_flop
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module tb_jk_flip_flop(
+
+    );
+     
+    reg j,k,clk;
+    wire j_g, k_g,q,q_bar;
+    
+    jk_flip_flop uut(j,k,clk,q,q_bar);                                                                  
+    
+    initial begin 
+        clk=0;
+        forever #5 clk=~clk;
+    end
+    
+    initial begin    
+        j=0; k=1; #10;
+        j=1; k=0; #10;
+        j=0; k=0; #10;
+        j=1; k=1; #10;
+    $finish;
+    end
+
+endmodule
+
+Simulation:
+<img width="1919" height="1079" alt="Screenshot 2025-11-19 095321" src="https://github.com/user-attachments/assets/8f017641-8eba-4836-9c07-3af6f9237993" />
+
+Elaborate Design:
+<img width="1919" height="1079" alt="Screenshot 2025-11-19 095411" src="https://github.com/user-attachments/assets/0cedccf1-2750-4fc3-a37d-9a111a225a0a" />
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
