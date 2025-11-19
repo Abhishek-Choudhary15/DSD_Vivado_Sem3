@@ -1395,4 +1395,102 @@ Elaborate Design:
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+MUX 8x1:-
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 19.11.2025 16:59:27
+// Design Name: 
+// Module Name: mux8to1
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module mux8to1(
+   input [7:0] D,
+    input [2:0] S,
+    output Y
+    );
+    assign Y = (S == 3'b000) ? D[0] :
+           (S == 3'b001) ? D[1] :
+           (S == 3'b010) ? D[2] :
+           (S == 3'b011) ? D[3] :
+           (S == 3'b100) ? D[4] :
+           (S == 3'b101) ? D[5] :
+           (S == 3'b110) ? D[6] :
+                           D[7];
+endmodule
+    
+Testbench:
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 19.11.2025 17:03:33
+// Design Name: 
+// Module Name: tb_mux8to1
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module tb_mux8to1(
+    
+    );
+    reg [7:0] D;
+    reg [2:0] S;
+    wire Y;
+    
+    mux8to1 uut (
+       D, S, Y
+    );
+    initial begin
+        
+        D = 8'b10101010; 
+
+    $display("S  | Y");
+    $monitor("%b | %b", S, Y);
+
+    for (S = 0; S < 8; S = S + 1)
+        #10;
+
+    $finish;
+end
+Endmodule
+
+Simulation:
+<img width="1919" height="1079" alt="Screenshot 2025-11-19 171520" src="https://github.com/user-attachments/assets/8f17919b-7ba6-49b6-83ae-f47e0fe45079" />
+
+
+Elaborate Design:
+<img width="1919" height="1079" alt="Screenshot 2025-11-19 171613" src="https://github.com/user-attachments/assets/9fd897ba-81ba-4038-bb97-67376686bf79" />
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
