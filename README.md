@@ -1492,5 +1492,104 @@ Elaborate Design:
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+T Flip Flop;-
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 19.11.2025 17:21:03
+// Design Name: 
+// Module Name: t_flipflop
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
 
 
+module t_flipflop(
+     input T,
+    input clk,
+    input reset,
+    output reg Q
+    );
+    always @(posedge clk or posedge reset) begin
+    if (reset)
+        Q <= 1'b0;
+    else if (T)
+        Q <= ~Q;       
+    else
+        Q <= Q;        
+end
+
+endmodule
+
+Testbench:
+
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 19.11.2025 17:22:54
+// Design Name: 
+// Module Name: tb_t_flipflop
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module tb_t_flipflop(
+
+    );
+    reg clk, reset, T;
+wire Q;
+
+t_flipflop uut (T, clk, reset, Q);
+
+initial begin
+    clk = 0;
+    forever #5 clk = ~clk;   
+end
+
+initial begin
+    reset = 1;
+    T = 0;
+    #10 reset = 0;
+
+    #10 T = 1;
+    #40 T = 0;
+    #20 T = 1;
+
+    #50 $finish;
+end
+
+initial begin
+    $monitor("Time=%0t | T=%b | Reset=%b | Q=%b", $time, T, reset, Q);
+end
+
+endmodule
+
+Simulation:
+<img width="1919" height="1079" alt="Screenshot 2025-11-19 172605" src="https://github.com/user-attachments/assets/decb3865-4fbb-450f-aaca-370d89c9b361" />
+
+Elaborate Design:
+<img width="1919" height="1079" alt="Screenshot 2025-11-19 172642" src="https://github.com/user-attachments/assets/01075744-e9f9-40d1-b29f-fe1e18ad20cf" />
